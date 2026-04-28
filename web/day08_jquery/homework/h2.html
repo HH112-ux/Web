@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>姓名:<input type="text" id="name"></div>
+    <div>身份证:<input type="text" id="idnum"></div>
+    <div>年龄:<input type="text" id="age"></div>
+    <div>性别:
+        <input type="radio" id="male" value="男">男
+        <input type="radio" id="female" value="女">女
+    </div>
+    <div>电话:<input type="tel" id="tel"></div>
+    <div>
+        <input type="button" value="获取值" id="btn">
+    </div>
+    <script src="../jquery-3.6.4.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $.ajax({
+                    url:"person.json",
+                    type:"get",
+                    dataType:"json",
+                    success:function(result){
+                        //console.log(result);
+                        $("#name").val(result.name);
+                        $("#idnum").val(result.idnum);
+                        $("#age").val(result.age);
+                        $("#tel").val(result.tel);
+                        let v=result.idnum;
+                        let x=v.charAt(v.length-2);
+                        //console.log(x);
+                        if (x%2==0){
+                            $("#female").prop("checked","checked");
+                        }else{
+                            $("#male").prop("checked","checked");
+                        }
+                    },
+                    error:function(){
+                        console.log("系统异常");
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

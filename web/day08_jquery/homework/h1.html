@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .out{
+            width: 400px;
+            border: 1px solid black;
+            margin: 10px auto;
+            display: flex;
+            justify-content: space-around;
+        }
+        img{
+            width: 150px;
+            border: 1px solid black;
+            margin: 10px 0px;
+        }
+        .in{
+            text-align: center;
+        }
+        [type='button']{
+            width: 80px;
+            height: 25px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="out">
+        <div class="in">
+            <div>
+                <img src="e.png">
+            </div>
+            <div>
+                <input type="button" value="0">
+            </div>
+        </div>
+        <div class="in">
+            <div>
+                <img src="w.png">
+            </div>
+            <div>
+                <input type="button" value="0">
+            </div>
+        </div>
+    </div>
+    <script src="../jquery-3.6.4.min.js"></script>
+    <script>
+        $(function(){
+            $("[type='button']").click(function(){
+                let v=parseInt($(this).val());
+                if (v==10){
+                    $("[type='button']").prop("disabled","disabled");
+                }else{
+                    $(this).val(v+1);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

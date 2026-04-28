@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type='text']{
+            width: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="n1" value="0">
+    <input type="text" id="n2" value="0">
+    <input type="text" id="n3" value="0">
+    <input type="button" value="开始" onclick="cj(this)">
+    <script>
+        let e;
+        function cj(obj){
+            let v=obj.value;
+            if (v=="开始"){
+                e=setInterval("setVal()","1");
+                obj.value="停止";
+            }else{
+                clearInterval(e);
+                obj.value="开始";
+            }
+        }
+        function setVal(){
+            document.getElementById("n1").value=getVal();
+            document.getElementById("n2").value=getVal();
+            document.getElementById("n3").value=getVal();
+        }
+        function getVal(){
+            return parseInt(Math.random()*10);
+        }
+    </script>
+</body>
+</html>
