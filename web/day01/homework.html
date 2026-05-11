@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day01 作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+        }
+        
+        .health-section ul {
+            list-style-type: none;
+        }
+
+        .health-section li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .health-section li:before {
+            content: '•';
+            color: #0066cc;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .health-section a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .health-section a:hover {
+            text-decoration: underline;
+        }
+
+        .gdp-section h3 {
+            color: #ff6600;
+            margin-bottom: 15px;
+        }
+
+        .gdp-list {
+            list-style-type: none;
+        }
+
+        .gdp-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .rank {
+            font-weight: bold;
+            margin-right: 10px;
+            width: 30px;
+        }
+
+        .flag {
+            width: 40px;
+            height: 25px;
+            margin-right: 10px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .country {
+            font-weight: 500;
+        }
+
+        .region-section dl {
+            margin-left: 20px;
+        }
+
+        .region-section dt {
+            font-weight: bold;
+            color: #0066cc;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .region-section dd {
+            margin-left: 20px;
+            padding-left: 10px;
+            border-left: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day01 作业</h1>
+
+    <div class="section health-section">
+        <h2>健康养生</h2>
+        <ul>
+            <li><a href="#">麦肯衣的全麦小法包</a></li>
+            <li><a href="#">仇人多少食物的坑</a></li>
+            <li><a href="#">食品安全"懒"性，我们该喜</a></li>
+            <li><a href="#">优与"胃"的友谊，是否走到尽头</a></li>
+        </ul>
+    </div>
+
+    <div class="section gdp-section">
+        <h2>GDP排行榜TOP5</h2>
+        <ul class="gdp-list">
+            <li class="gdp-item">
+                <span class="rank">1.</span>
+                <div class="flag">
+                    <img src="img/美国国旗.png" alt="美国国旗">
+                </div>
+                <span class="country">美国</span>
+            </li>
+            <li class="gdp-item">
+                <span class="rank">2.</span>
+                <div class="flag">
+                    <img src="img/中国国旗.png" alt="中国国旗">
+                </div>
+                <span class="country">中国</span>
+            </li>
+            <li class="gdp-item">
+                <span class="rank">3.</span>
+                <div class="flag">
+                    <img src="img/日本国旗.png" alt="日本国旗">
+                </div>
+                <span class="country">日本</span>
+            </li>
+            <li class="gdp-item">
+                <span class="rank">4.</span>
+                <div class="flag">
+                    <img src="img/德国国旗.png" alt="德国国旗">
+                </div>
+                <span class="country">德国</span>
+            </li>
+            <li class="gdp-item">
+                <span class="rank">5.</span>
+                <div class="flag">
+                    <img src="img/印度国旗.png" alt="印度国旗">
+                </div>
+                <span class="country">印度</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section region-section">
+        <h2>地区分布</h2>
+        <dl>
+            <dt>浙江省</dt>
+            <dd>杭州市</dd>
+            <dd>宁波市</dd>
+            <dt>江苏省</dt>
+            <dd>南京市
+                <ul style="list-style-type: square; margin-left: 20px;">
+                    <li>玄武区</li>
+                    <li>秦淮区</li>
+                </ul>
+            </dd>
+            <dd>苏州市</dd>
+            <dt>吉林省</dt>
+            <dd>长春市</dd>
+            <dd>吉林市</dd>
+        </dl>
+    </div>
+</body>
+</html>

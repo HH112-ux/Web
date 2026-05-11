@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{
+            background-color: rgba(0, 0, 255, 0.534);
+            color: #fff;
+            border: 1px solid  rgba(0, 0, 255, 0.534);
+            width: 80px;
+            border-radius: 5px;
+            font-size: 14px;
+            padding: 3px 5px;
+        }
+        .btn:hover{
+            background-color: rgba(0, 0, 255, 0.925);
+        }
+    </style>
+</head>
+<body>
+    <form action="http://www.baidu.com" >
+        <div>
+            帐号: 
+            <input type="text" name="acc" value="admin" size="10" alt="帐号" readonly>
+        </div>
+        <div>
+            <label for="idNum">身份证: </label>
+            <input type="text" name="idnum" maxlength="18"
+            placeholder="请输入身份证" required autocomplete="off" id="idNum">
+        </div>
+        <div>
+            密码:
+            <input type="password" name="pwd">
+        </div>
+        <div>
+            性别:
+            <input type="radio" name="gender" value="man" required id="man">
+            <label for="man">男</label>
+            <input type="radio" name="gender" value="woman" required id="woman">
+            <label for="woman">女</label>
+        </div>
+        <div>
+            爱好:
+            <input type="checkbox" value="唱歌">唱歌
+            <input type="checkbox">打球
+            <input type="checkbox" checked>音乐
+        </div>
+        <div>
+            头像:
+            <input type="file" name="pic">
+        </div>
+        <div>
+            <input type="button" value="普通按钮" onclick="alert('hello')" disabled>
+            <input type="submit" value="提交" class="btn">
+            <input type="reset" value="重置">
+        </div>
+        <input type="hidden" name="email" value="222222@qq.com"><!--隐藏表单域-->
+        <!-- <input type="image"> -->
+    </form>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day03 作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+        }
+
+        .pagination {
+            display: inline-block;
+            background: #e6f2ff;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 2px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #cce6ff;
+        }
+
+        .pagination .current {
+            background: #ff6600;
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar {
+            background: #cc0000;
+            color: white;
+            padding: 8px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .navbar li {
+            margin-right: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffcc00;
+        }
+
+        .navbar .right {
+            margin-left: auto;
+        }
+
+        .calendar {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+
+        .calendar h3 {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .calendar-item {
+            text-align: center;
+        }
+
+        .calendar-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #cc0000;
+        }
+
+        .calendar-item p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .pricing-table th {
+            background: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .pricing-table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .pricing-table tr:hover {
+            background: #e6f7ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day03 作业</h1>
+
+    <div class="section">
+        <h2>1. 分页效果</h2>
+        <div class="pagination">
+            <a href="#">首页</a>
+            <a href="#" class="current">上一页</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">下一页</a>
+            <a href="#">尾页</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. 导航条效果</h2>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">院系设置</a></li>
+                <li><a href="#">招生就业</a></li>
+                <li><a href="#">科学研究</a></li>
+                <li><a href="#">人才培养</a></li>
+                <li class="right"><a href="#">友情链接</a></li>
+                <li class="right"><a href="#">网站地图</a></li>
+                <li class="right"><a href="#">联系我们</a></li>
+                <li class="right"><a href="#">English</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="section">
+        <h2>3. 招生日历</h2>
+        <div class="calendar">
+            <h3>招生日历</h3>
+            <div class="calendar-grid">
+                <div class="calendar-item">
+                    <div class="calendar-icon">🎓</div>
+                    <p>保送生</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">🏛️</div>
+                    <p>高水平艺术团</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">⚽</div>
+                    <p>高水平运动队</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">🌍</div>
+                    <p>留学生</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">📚</div>
+                    <p>强基计划</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">⭐</div>
+                    <p>筑梦计划</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">🏫</div>
+                    <p>港澳台侨</p>
+                </div>
+                <div class="calendar-item">
+                    <div class="calendar-icon">📅</div>
+                    <p>继续教育</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. 表格</h2>
+        <table class="pricing-table">
+            <tr>
+                <th>Store space</th>
+                <th>Smart Start</th>
+                <th>Smart Medium</th>
+                <th>Smart Business</th>
+                <th>Smart Deluxe</th>
+            </tr>
+            <tr>
+                <td>Store space</td>
+                <td>512MB</td>
+                <td>1GB</td>
+                <td>2GB</td>
+                <td>4GB</td>
+            </tr>
+            <tr>
+                <td>Store space</td>
+                <td>512MB</td>
+                <td>1GB</td>
+                <td>2GB</td>
+                <td>4GB</td>
+            </tr>
+            <tr>
+                <td>Store space</td>
+                <td>512MB</td>
+                <td>1GB</td>
+                <td>2GB</td>
+                <td>4GB</td>
+            </tr>
+            <tr>
+                <td>Store space</td>
+                <td>512MB</td>
+                <td>1GB</td>
+                <td>2GB</td>
+                <td>4GB</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
