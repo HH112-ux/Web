@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day05 作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+        }
+
+        /* 1. 图片效果 */
+        .image-container {
+            position: relative;
+            width: 400px;
+            height: 250px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-container .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .image-container .watermark {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* 2. Beats广告轮播效果 */
+        .carousel {
+            position: relative;
+            width: 600px;
+            height: 300px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #cc0000;
+            border-radius: 8px;
+        }
+
+        .carousel-content {
+            position: relative;
+            height: 100%;
+        }
+
+        .carousel-text {
+            position: absolute;
+            left: 100px;
+            top: 60px;
+            color: white;
+            z-index: 2;
+        }
+
+        .carousel-text .tag {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .carousel-text .title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .carousel-text .subtitle {
+            font-size: 14px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .carousel-text .price {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .carousel-text .btn {
+            display: inline-block;
+            padding: 10px 30px;
+            background: white;
+            color: #cc0000;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .carousel-text .btn:hover {
+            background: #eee;
+        }
+
+        .carousel-image {
+            position: absolute;
+            right: 50px;
+            bottom: 0;
+            width: 250px;
+            z-index: 1;
+        }
+
+        .carousel-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* 3. 126邮箱首页 */
+        .email-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            background: linear-gradient(135deg, #00a8ff 0%, #0066cc 100%);
+            padding: 50px;
+            border-radius: 8px;
+        }
+
+        .mailbox {
+            text-align: center;
+        }
+
+        .mailbox img {
+            width: 200px;
+            height: auto;
+        }
+
+        .mailbox .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .login-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .login-form h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #45a049;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .links a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 12px;
+            margin: 0 10px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day05 作业</h1>
+
+    <!-- 1. 图片效果 -->
+    <div class="section">
+        <h2>1. 图片效果</h2>
+        <div class="image-container">
+            <img src="img/a.jpg" alt="辽宁桓仁五女山景区">
+            <div class="watermark">辽宁桓仁五女山景区</div>
+            <div class="overlay">
+                <p>辽宁桓仁五女山景区</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Beats广告轮播效果 -->
+    <div class="section">
+        <h2>2. Beats广告轮播效果</h2>
+        <div class="carousel" id="carousel">
+            <div class="slide active">
+                <div class="carousel-text">
+                    <div class="tag">Beats Solo3</div>
+                    <div class="title">世界音你精彩</div>
+                    <div class="subtitle">Voice of the world</div>
+                    <div class="price">RMB 1699</div>
+                    <a href="#" class="btn">立即购买</a>
+                </div>
+                <div class="carousel-image">
+                    <img src="img/ad.jpg" alt="Beats Solo3">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="carousel-text">
+                    <div class="tag">Beats Studio</div>
+                    <div class="title">音乐无限可能</div>
+                    <div class="subtitle">Music is everything</div>
+                    <div class="price">RMB 2999</div>
+                    <a href="#" class="btn">立即购买</a>
+                </div>
+                <div class="carousel-image">
+                    <img src="img/ad.jpg" alt="Beats Studio">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="carousel-text">
+                    <div class="tag">Beats Pro</div>
+                    <div class="title">专业级音质</div>
+                    <div class="subtitle">Professional sound</div>
+                    <div class="price">RMB 3999</div>
+                    <a href="#" class="btn">立即购买</a>
+                </div>
+                <div class="carousel-image">
+                    <img src="img/ad.jpg" alt="Beats Pro">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="carousel-text">
+                    <div class="tag">Beats X</div>
+                    <div class="title">无线自由</div>
+                    <div class="subtitle">Freedom of wireless</div>
+                    <div class="price">RMB 1299</div>
+                    <a href="#" class="btn">立即购买</a>
+                </div>
+                <div class="carousel-image">
+                    <img src="img/ad.jpg" alt="Beats X">
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active" data-index="0"></span>
+                <span class="indicator" data-index="1"></span>
+                <span class="indicator" data-index="2"></span>
+                <span class="indicator" data-index="3"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. 126邮箱首页 -->
+    <div class="section">
+        <h2>3. 126邮箱首页</h2>
+        <div class="email-login">
+            <div class="mailbox">
+                <img src="img/m3.jpg" alt="邮箱图标">
+                <div class="logo">126网易免费邮箱</div>
+            </div>
+            <form class="login-form">
+                <h3>账号登录</h3>
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="邮箱账号或手机号码">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="输入密码">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="remember"> 15天内免登录
+                    </label>
+                </div>
+                <button type="submit" class="login-btn">登录</button>
+                <div class="links">
+                    <a href="#">忘记密码</a>
+                    <span>|</span>
+                    <a href="#">注册账号</a>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <p>网易邮箱官方 (京ICP备10005901号) | 服务条款 | 隐私政策</p>
+        </div>
+    </div>
+
+    <script>
+        const indicators = document.querySelectorAll('.indicator');
+        const slides = document.querySelectorAll('.slide');
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(ind => ind.classList.remove('active'));
+                
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

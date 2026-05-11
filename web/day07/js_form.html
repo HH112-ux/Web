@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function validate(){
+            //校验姓名不能为空
+            let nameVal=val("name");
+            if (nameVal.trim()==""){
+                html("nameres","姓名不能为空")
+                return;
+            }else{
+                html("nameres","")
+            }
+            //校验电话号码必须符合正则表达式
+            let telVal=val("tel");
+            let regx=/^1[3456789]\d{9}$/;
+            if (!regx.test(telVal)){
+                html("telres","电话号码不符合规则")
+                return;
+            }else{
+                html("telres","")
+            }
+            //校验单选按钮必须被选中
+            let genders=document.getElementsByName("gender");//获取到数组
+            let b=false;
+            for(let gender of genders){
+                if (gender.checked){//判断是否被选中
+                    b=true;
+                    break;
+                }
+            }
+            if (!b){
+                html("genderres","请选择性别")
+                return;
+            }else{
+                html("genderres","")
+            }
+
+        }
+        function val(id){
+            return document.getElementById(id).value;
+        }
+        function html(id,html){
+            document.getElementById(id).innerHTML=html;
+        }
+        function doCheckAll(obj){
+            //alert(obj.checked)
+            let inputs=document.getElementsByTagName("input");
+            for (let input of inputs){
+                if (input.type=="checkbox"){
+                    input.checked=obj.checked;
+                }
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <div>姓名:<input type="text" id="name">
+            <span id="nameres"></span>
+        </div>
+        <div>
+            电话:<input type="tel" id="tel">
+            <span id="telres"></span>
+        </div>
+        <div>
+            性别:
+            <input type="radio" name="gender" value="男">男
+            <input type="radio" name="gender" value="女">女
+            <span id="genderres"></span>
+        </div>
+        <div>
+            爱好:
+            <input type="checkbox" onclick="doCheckAll(this)">全选
+            <input type="checkbox">打球
+            <input type="checkbox">唱歌
+            <input type="checkbox">跳舞
+        </div>
+        <div><button type="button" onclick="validate()">提交</button></div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day07 作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+        }
+        .lottery-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 12px;
+        }
+
+        .lottery-input {
+            width: 60px;
+            height: 60px;
+            font-size: 32px;
+            text-align: center;
+            border: 3px solid white;
+            border-radius: 8px;
+            background: white;
+            font-weight: bold;
+            color: #333;
+            outline: none;
+        }
+
+        .lottery-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lottery-btn.start {
+            background: #4caf50;
+            color: white;
+        }
+
+        .lottery-btn.start:hover {
+            background: #45a049;
+        }
+
+        .lottery-btn.stop {
+            background: #f44336;
+            color: white;
+        }
+
+        .lottery-btn.stop:hover {
+            background: #da190b;
+        }
+
+        /* 2. 菜单折叠 */
+        .menu-container {
+            width: 250px;
+            background: #2c3e50;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .menu-item {
+            background: #34495e;
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background: #2980b9;
+        }
+
+        .menu-icon {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .menu-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .submenu {
+            background: #1a252f;
+            display: none;
+        }
+
+        .submenu.active {
+            display: block;
+        }
+
+        .submenu-item {
+            padding: 12px 20px 12px 50px;
+            color: #bdc3c7;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .submenu-item:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .clock-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+        }
+
+        .clock-date {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .clock-time {
+            font-size: 64px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .clock-weekday {
+            font-size: 20px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day07 作业</h1>
+
+    <div class="section">
+
+        <div class="lottery-container">
+            <input type="text" class="lottery-input" id="lottery1" value="0" readonly>
+            <input type="text" class="lottery-input" id="lottery2" value="0" readonly>
+            <input type="text" class="lottery-input" id="lottery3" value="0" readonly>
+            <button class="lottery-btn start" id="lotteryBtn">开始</button>
+        </div>
+    </div>
+
+    <div class="section">
+
+        <div class="menu-container">
+            <div class="menu-item" id="menuUser">
+                <span class="menu-icon">-</span>
+                <span class="menu-title">用户管理</span>
+            </div>
+            <div class="submenu active" id="submenuUser">
+                <div class="submenu-item">用户列表</div>
+                <div class="submenu-item">用户新增</div>
+                <div class="submenu-item">用户删除</div>
+                <div class="submenu-item">用户修改</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section">
+        
+        <div class="clock-container">
+            <div class="clock-date" id="clockDate"></div>
+            <div class="clock-time" id="clockTime"></div>
+            <div class="clock-weekday" id="clockWeekday"></div>
+        </div>
+    </div>
+
+    <script>
+
+        let lotteryInterval1 = null;
+        let lotteryInterval2 = null;
+        let lotteryInterval3 = null;
+        let isRunning = false;
+
+        const lotteryBtn = document.getElementById('lotteryBtn');
+        const lottery1 = document.getElementById('lottery1');
+        const lottery2 = document.getElementById('lottery2');
+        const lottery3 = document.getElementById('lottery3');
+
+        lotteryBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                lotteryBtn.textContent = '停止';
+                lotteryBtn.classList.remove('start');
+                lotteryBtn.classList.add('stop');
+
+                lotteryInterval1 = setInterval(() => {
+                    lottery1.value = Math.floor(Math.random() * 10);
+                }, 50);
+
+                lotteryInterval2 = setInterval(() => {
+                    lottery2.value = Math.floor(Math.random() * 10);
+                }, 60);
+
+                lotteryInterval3 = setInterval(() => {
+                    lottery3.value = Math.floor(Math.random() * 10);
+                }, 70);
+            } else {
+                // 停止摇奖
+                isRunning = false;
+                lotteryBtn.textContent = '开始';
+                lotteryBtn.classList.remove('stop');
+                lotteryBtn.classList.add('start');
+
+                clearInterval(lotteryInterval1);
+                clearInterval(lotteryInterval2);
+                clearInterval(lotteryInterval3);
+            }
+        });
+
+    
+        const menuUser = document.getElementById('menuUser');
+        const submenuUser = document.getElementById('submenuUser');
+        const menuIcon = menuUser.querySelector('.menu-icon');
+
+        menuUser.addEventListener('click', () => {
+            submenuUser.classList.toggle('active');
+            
+            if (menuIcon.textContent === '-') {
+                menuIcon.textContent = '+';
+            } else {
+                menuIcon.textContent = '-';
+            }
+        });
+
+        function updateClock() {
+            const now = new Date();
+            
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            document.getElementById('clockDate').textContent = `${year}年${month}月${day}日`;
+
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
+
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const weekday = weekdays[now.getDay()];
+            document.getElementById('clockWeekday').textContent = weekday;
+        }
+
+        updateClock();
+
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>

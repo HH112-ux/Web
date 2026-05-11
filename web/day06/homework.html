@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day06 作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+        }
+
+        .multiplication-table {
+            display: inline-block;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .multiplication-table .row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .multiplication-table .cell {
+            width: 100px;
+            padding: 5px 10px;
+            background: white;
+            border: 1px solid #ddd;
+            margin-right: 5px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .multiplication-table .cell:hover {
+            background: #e6f2ff;
+            cursor: pointer;
+        }
+
+        .narcissistic-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .narcissistic-number {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .info {
+            background: #e6f2ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .info code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day06 作业</h1>
+
+    <div class="section">
+        <h2>1. 九九乘法表</h2>
+        <div id="multiplicationTable" class="multiplication-table"></div>
+    </div>
+
+    <div class="section">
+        <h2>2. 冒泡排序</h2>
+        <div id="sortResult">
+            <p><strong>排序过程：</strong></p>
+            <div id="sortSteps"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. 水仙花数（1000以内）</h2>
+        <div class="info">
+            <p>水仙花数是指一个三位数，其各位数字的立方和等于该数本身。</p>
+            <p>例如：<code>153 = 1³ + 5³ + 3³ = 1 + 125 + 27 = 153</code></p>
+        </div>
+        <div id="narcissisticNumbers" class="narcissistic-numbers"></div>
+    </div>
+
+    <script>
+        // 1. 九九乘法表
+        function createMultiplicationTable() {
+            const container = document.getElementById('multiplicationTable');
+            
+            for (let i = 1; i <= 9; i++) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                
+                for (let j = 1; j <= i; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.textContent = `${j}×${i}=${j * i}`;
+                    row.appendChild(cell);
+                }
+                
+                container.appendChild(row);
+            }
+        }
+
+        // 2. 冒泡排序
+        function bubbleSort() {
+            const arr = [23, 21, 4, 16, 8, 25];
+            const stepsContainer = document.getElementById('sortSteps');
+            
+            console.log('原始数组:', arr);
+            
+            const steps = [];
+            steps.push(`原始数组: [${arr.join(', ')}]`);
+            
+            for (let i = 0; i < arr.length - 1; i++) {
+                for (let j = 0; j < arr.length - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        const temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        steps.push(`第${i + 1}轮第${j + 1}次交换: [${arr.join(', ')}]`);
+                    }
+                }
+            }
+            
+            console.log('排序后数组:', arr);
+            
+            steps.push(`最终结果: [${arr.join(', ')}]`);
+            
+            steps.forEach((step, index) => {
+                const p = document.createElement('p');
+                p.textContent = step;
+                p.style.margin = '5px 0';
+                p.style.padding = '5px 10px';
+                p.style.background = index === steps.length - 1 ? '#d4edda' : '#f8f9fa';
+                p.style.borderRadius = '4px';
+                stepsContainer.appendChild(p);
+            });
+        }
+
+        // 3. 水仙花数
+        function findNarcissisticNumbers() {
+            const container = document.getElementById('narcissisticNumbers');
+            const numbers = [];
+            
+            for (let i = 100; i < 1000; i++) {
+                const hundreds = Math.floor(i / 100);
+                const tens = Math.floor((i % 100) / 10);
+                const ones = i % 10;
+                
+                const sum = Math.pow(hundreds, 3) + Math.pow(tens, 3) + Math.pow(ones, 3);
+                
+                if (sum === i) {
+                    numbers.push(i);
+                }
+            }
+            
+            console.log('1000以内的水仙花数:', numbers);
+            
+            numbers.forEach((num, index) => {
+                const div = document.createElement('div');
+                div.className = 'narcissistic-number';
+                
+                const hundreds = Math.floor(num / 100);
+                const tens = Math.floor((num % 100) / 10);
+                const ones = num % 10;
+                
+                div.textContent = num;
+                div.title = `${num} = ${hundreds}³ + ${tens}³ + ${ones}³`;
+                container.appendChild(div);
+            });
+        }
+
+        // 执行所有函数
+        createMultiplicationTable();
+        bubbleSort();
+        findNarcissisticNumbers();
+    </script>
+</body>
+</html>

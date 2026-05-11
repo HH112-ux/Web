@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+        }
+        .xx{
+            background-color: aqua;
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <input type="button" value="改样式" id="btn">
+    <script src="jquery-3.6.4.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                /* $("div").css("background-color","blue")
+                .css("border","1px solid black"); */
+                /* $("div").css({"background-color":"yellow","border":"1px solid black"}) */
+                $("div").addClass("xx");
+
+            })
+        })
+    </script>
+</body>
+
+</html>

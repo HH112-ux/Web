@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day08 作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+        }
+
+        .vote-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .vote-item {
+            text-align: center;
+        }
+
+        .flag {
+            width: 150px;
+            height: 100px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .vote-count {
+            width: 80px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            line-height: 36px;
+            background: #f9f9f9;
+        }
+
+        .vote-btn {
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #4caf50;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .vote-btn:hover:not(:disabled) {
+            background: #45a049;
+        }
+
+        .vote-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .winner {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group .radio-group label {
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .form-group input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .submit-btn {
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #0066cc;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #004d99;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day08 作业</h1>
+
+    <div class="section">
+
+        <div class="vote-container">
+            <div class="vote-item">
+                <div class="flag" id="flagRussia" style="background: linear-gradient(to bottom, white 0%, white 33%, blue 33%, blue 66%, red 66%, red 100%);"></div>
+                <div class="vote-count" id="countRussia">0</div>
+                <button class="vote-btn" id="btnRussia">投票</button>
+                <p>俄罗斯</p>
+            </div>
+            <div class="vote-item">
+                <div class="flag" id="flagUkraine" style="background: linear-gradient(to bottom, blue 0%, blue 50%, yellow 50%, yellow 100%);"></div>
+                <div class="vote-count" id="countUkraine">0</div>
+                <button class="vote-btn" id="btnUkraine">投票</button>
+                <p>乌克兰</p>
+            </div>
+        </div>
+        <div class="winner" id="winner"></div>
+    </div>
+
+
+    <div class="section">
+    
+        <div class="form-container">
+            <div class="form-group">
+                <label>姓名:</label>
+                <input type="text" id="name" readonly>
+            </div>
+            <div class="form-group">
+                <label>身份证:</label>
+                <input type="text" id="idnum" readonly>
+            </div>
+            <div class="form-group">
+                <label>年龄:</label>
+                <input type="text" id="age" readonly>
+            </div>
+            <div class="form-group">
+                <label>性别:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male" readonly> 男</label>
+                    <label><input type="radio" name="gender" value="female" readonly> 女</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>电话:</label>
+                <input type="text" id="tel" readonly>
+            </div>
+            <button class="submit-btn" id="getDataBtn">获取值</button>
+        </div>
+    </div>
+
+    <script src="jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let russiaCount = 0;
+            let ukraineCount = 0;
+            const maxVotes = 10;
+
+            $('#btnRussia').click(function() {
+                if (russiaCount < maxVotes && ukraineCount < maxVotes) {
+                    russiaCount++;
+                    $('#countRussia').text(russiaCount);
+                    checkWinner();
+                }
+            });
+
+            $('#btnUkraine').click(function() {
+                if (russiaCount < maxVotes && ukraineCount < maxVotes) {
+                    ukraineCount++;
+                    $('#countUkraine').text(ukraineCount);
+                    checkWinner();
+                }
+            });
+
+            function checkWinner() {
+                if (russiaCount >= maxVotes) {
+                    $('#winner').text('俄罗斯获胜！');
+                    $('#btnRussia, #btnUkraine').prop('disabled', true);
+                } else if (ukraineCount >= maxVotes) {
+                    $('#winner').text('乌克兰获胜！');
+                    $('#btnRussia, #btnUkraine').prop('disabled', true);
+                }
+            }
+        });
+
+        $(document).ready(function() {
+            $('#getDataBtn').click(function() {
+                $.ajax({
+                    url: 'data.json',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#name').val(data.name);
+                        $('#idnum').val(data.idnum);
+                        $('#age').val(data.age);
+                        $('#tel').val(data.tel);
+
+                        const idnum = data.idnum;
+                        if (idnum && idnum.length >= 18) {
+                            const secondLastDigit = parseInt(idnum.charAt(idnum.length - 2));
+                            if (secondLastDigit % 2 === 1) {
+                
+                                $('input[name="gender"][value="male"]').prop('checked', true);
+                            } else {
+    
+                                $('input[name="gender"][value="female"]').prop('checked', true);
+                            }
+                        }
+                    },
+                    error: function() {
+                        alert('获取数据失败！');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

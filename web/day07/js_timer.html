@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let e;
+        function timers(){
+            //延迟指定毫秒数后，去执行第一个参数给定的事件,只执行一次
+            e=setTimeout("test()",'2000');
+        }
+        function test(){
+            alert('hello')
+        }
+        //clearTimeout(e);
+    </script>
+    <button type="button" onclick="timers()">按钮1</button>
+</body>
+</html>
