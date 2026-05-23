@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <!-- 
+        变量字面量类型的数组
+         item: 每一个元素
+         index: 每一个元素在数组中对应的下标
+       -->
+       <ul>
+            <li v-for="(item,index) in arr">
+                {{ item }}  -- {{ index }}
+            </li>
+       </ul>
+
+       <!-- 
+          遍历js对象
+          key: 对象的属性名称
+          value: 对象的属性值
+          index: 每一个属性对应的下标
+       -->
+       <ul>
+            <li v-for="(value,key,index) in person">
+                {{ key }}  -- {{ value }}  -- {{ index }}
+            </li>
+       </ul> 
+       
+       <!-- 
+          遍历对象类型的数组
+          item: 遍历的每一个js对象
+       -->
+       <ul>
+            <li v-for="item in emps">
+                {{ item.name }} -- {{ item.age }} 
+            </li>
+       </ul>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+   const app = new Vue({
+       el:"#app",
+       data:{
+         // 定义字面量的数组
+         arr:['白菜','西红柿','萝卜','花菜'],
+         // 定义一个js对象
+         person:{
+            name:'eric',
+            age:18,
+            address:'USA'
+         },
+         // 定义一个对象类型的数组
+         emps:[
+            {name:'james',age:40},
+            {name:'kobe',age:38},
+            {name:'eric',age:20}
+         ]
+       }
+   })
+</script>
+</html>
