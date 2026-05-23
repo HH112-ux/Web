@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ nickname }}</p>
+        <p>{{ nickname.toUpperCase() }}</p>
+        <p>{{ 'hello,' + nickname }}</p>
+        <p>{{ age >=18 ? "成年人":"未成年"}}</p>
+        <p>{{ friend.name }}</p>
+        <p>{{ friend.desc }}</p>
+		<p>{{ age }}</p>
+        <div v-html="msg"></div>
+        <div v-text="msg"></div>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    const vue = new Vue({
+        el:"#app",
+        data:{
+            nickname:'eric',
+            age: 18,
+            friend:{
+                name:'kobe',
+                desc:'擅长打篮球'
+            },
+        }
+    })
+</script>
+</html>

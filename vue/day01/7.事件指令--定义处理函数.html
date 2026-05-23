@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div id="app">
+       <button @click="fn">控制元素的显示与隐藏</button>
+       <h5 v-if="isShow">hello,vue</h5>
+   </div> 
+</body>
+<script src="js/vue.js"></script>
+<script>
+    const vue = new Vue({
+        el:"#app",
+        data:{
+           isShow: true
+        },
+        methods:{
+            fn(){
+                // this指的是vue实例对象
+                this.isShow = !this.isShow
+            }
+        }
+    })
+</script>
+</html>

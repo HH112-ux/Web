@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" @keyup.enter="fn" v-model="username">
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+   const vue = new Vue({
+      el:"#app",
+      data:{
+        username:''
+      },
+      methods:{
+        fn(e){ // e就是事件对象
+            //console.log(this.username)
+            if(e.key === 'Enter'){ // e.key 获取当前按下的键  ‘Enter’ 回车键
+                console.log(this.username)
+            }
+        }
+      }
+   })
+</script>
+</html>

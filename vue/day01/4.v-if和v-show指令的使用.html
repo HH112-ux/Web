@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+            margin: 10px;
+            border: 3px solid #000;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+           这两个指令都是用来控制元素的显示与隐藏。
+           v-show: 控制元素的显示和隐藏通过css样式控制，display:none
+           v-if: 控制元素的显示和隐藏通过DOM操作来控制。 隐藏元素就是删除dom，显示元素就是新建dom
+        -->
+         <div v-show="flag" class="box">我是v-show指令控制的div</div>
+         <div v-if="true" class="box">我是v-if指令控制的div</div>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    const vue = new Vue({
+        el:"#app",
+        data:{
+            flag:false
+        }
+    })
+</script>
+</html>

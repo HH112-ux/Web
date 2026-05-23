@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+       vue指令帮助我们实现HTML标签的特定功能
+          v-html: 给我们的标签设置HTML类型的文本内容
+          v-text: 给我们的标签设置纯文本内容
+    -->
+    <div id="app">
+         <div>{{content}}</div>
+         <div v-html="content"></div>
+         <p v-html="msg"></p>
+         <p v-text="msg"></p>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    const vue = new Vue({
+        el:"#app",
+        data:{
+            content:'hello',
+            msg: `<a href='http://www.baidu.com'>[超链接]</a>`
+        }
+    })
+</script>
+</html>
